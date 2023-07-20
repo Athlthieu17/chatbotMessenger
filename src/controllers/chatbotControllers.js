@@ -70,10 +70,10 @@ function handleMessage(sender_psid, received_message) {
 
   // Check if the message contains text
   if (received_message.text) {    
-
+    let username = getUserName(sender_psid);
     // Create the payload for a basic text message
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an image!`
+      "text": `Xin chào bạn: "${username}", nếu bạn không tra được SBD của mình trên Website thì hãy để lại SBD cho Team ViAiPi kiểm tra lại nhé !`
     }
   }  
   
@@ -83,7 +83,28 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
+  
+}
 
+let getUserName = (sender_psid) =>
+{
+  let username = '';
+
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": 'https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}',
+    "method": "GET",
+  }, (err, res, body) => {
+
+    if (!err) {
+      body = JSON.parse(body);
+      username = '${body.first_name} ${body.last_name}';
+    } else {
+      console.error("Unable to send message:" + err);
+    }
+  }); 
+
+  return username;
 }
 
 // Sends response messages via the Send API
