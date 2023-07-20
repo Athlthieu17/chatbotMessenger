@@ -73,7 +73,7 @@ function handleMessage(sender_psid, received_message) {
     let username = getUserName(sender_psid);
     // Create the payload for a basic text message
     response = {
-      "text": `Xin chào bạn: "${username}", nếu bạn không tra được SBD của mình trên Website thì hãy để lại SBD cho Team ViAiPi kiểm tra lại nhé !`
+      "text": `Xin chào bạn, nếu bạn không tra được SBD của mình trên Website thì hãy để lại SBD cho Team ViAiPi kiểm tra lại nhé !`
     }
   }  
   
